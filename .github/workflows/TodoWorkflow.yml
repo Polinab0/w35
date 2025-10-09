@@ -20,5 +20,7 @@ jobs:
         uses: googleapis/release-please-action@v4
         with:
           release-type: simple
+
+      - name: Set up Node.js
         run: npm run build 
        
