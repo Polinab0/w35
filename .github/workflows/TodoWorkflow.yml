@@ -4,8 +4,8 @@ on:
     branches:
       - "main"  
 
-  jobs:
-   integration-delivery:
+jobs:
+  integration-delivery:
     runs-on: ubuntu-latest
     environment: Test
     container:
