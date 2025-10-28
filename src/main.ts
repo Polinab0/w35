@@ -61,3 +61,27 @@ todoForm.addEventListener('submit', (event:Event) => {
 
   
   }
+
+
+  // Function to change the background color of the page based on the color picker value
+const changeBackgroundColor = (color: string): void => {
+  document.body.style.backgroundColor = color;
+};
+
+// Function to initialize the color picker event listener
+const initializeColorPicker = (): void => {
+  const colorPicker = document.getElementById('colorPicker') as HTMLInputElement; // encapsulate the color picker element to this function
+  if (colorPicker) {
+    colorPicker.addEventListener('input', (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      changeBackgroundColor(target.value);
+    });
+  } else {
+    console.error('Color picker element not found');
+  }
+};
+
+// Call the initializeColorPicker function when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  initializeColorPicker();
+});

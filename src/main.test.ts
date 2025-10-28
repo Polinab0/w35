@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vitest'; 
 
 interface Todo {
     id: number;
@@ -16,7 +16,7 @@ const addTodo = (todo: Todo [] , text:string) => {
 }
 
 const removeTodo = (todos: Todo [], id: number) => {
-    return todos.filter(todo => todo.id ! == id)
+    return todos.filter(todo => todo.id !== id)
 }
 
 describe('addTodo', () => {
@@ -32,8 +32,8 @@ describe('addTodo', () => {
 describe ('removeTodo', () => {
     it('should remove a todo', () => {
         const todos : Todo [] = [
-            { id: 1, text: 'Test todo 1', completed: false },
-            { id: 2, text: 'Test todo 2', completed: true }
+            { id: 123, text: 'Test todo 1', completed: false },
+            { id: 456, text: 'Test todo 2', completed: true }
         ]
         const result = removeTodo(todos,123); 
         expect(result.length).toBe(1);
