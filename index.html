@@ -11,13 +11,26 @@
     <div class="container">
       <h1>Todo App</h1>
       <form class="todo-form">
-        <input type="text" id="todo-input" placeholder="Enter a new todo">
+        <input type="text" 
+        id="todo-input" 
+        placeholder="Enter a new todo"
+        />
+        <input type="date" id="date-input" />
         <button type="submit">Add Todo</button>
       </form>
      
       <div id="error-message" class="error-message">Dumbass! enter stuff for </div>
-      <ul class="todo-list"></ul>
+      <div class="filters">
+                <button id="filter-all" class="active">All</button>
+                <button id="filter-active">Active</button>
+                <button id="filter-completed">Completed</button>
+            </div>
+
+      <ul class="todo-list" id="todo-list" ></ul>
+
+       <input type="color" id="colorPicker" />
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
+
