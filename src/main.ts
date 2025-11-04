@@ -91,8 +91,25 @@
 
 
 // 1 Import the CSS file: This ensures that the styles are applied to the HTML elements.
+// src/main.ts
+
+
 import "./style.css";
-import { addTodo, removeTodo, editTodo, todos, setFilterStatus, getFilterTodos, filterStatus, type FilterStatus } from "./state";
+
+
+import {
+    addTodo,
+    removeTodo,
+    editTodo,
+    todos,
+    setFilterStatus,
+    getFilterTodos,
+    filterStatus,
+    type FilterStatus,
+    toggleTodoCompleted,
+} from "./state";
+
+
 import {
     todoForm,
     todoInput,
@@ -102,24 +119,19 @@ import {
     clearInputError,
     promptForEditText,
     initializeColorPicker,
-    ubdateFilterButtons,
+   updateFilterButtons ,
     filterAll,
     filterActive,
     filterCompleted,
     dateInput,
 } from "./ui";
-import type { F } from "vitest/dist/chunks/config.d.D2ROskhv.js";
 
-const updateUI = (): void => {
-    const filteredTodos = getFilterTodos();
-    renderTodos(filteredTodos, handleRemove, handleEdit);
-    ubdateFilterButtons(filterStatus);
-};
 
 const handleRemove = (id: number): void => {
     removeTodo(id);
     updateUI();
 };
+
 
 const handleEdit = (id: number): void => {
     const todo = todos.find((todo) => todo.id === id);
@@ -132,13 +144,30 @@ const handleEdit = (id: number): void => {
     }
 };
 
+
+const handleToggle = (id: number): void => {
+    toggleTodoCompleted(id); 
+    updateUI();             
+};
+
+
+const updateUI = (): void => {
+    const filteredTodos = getFilterTodos();
+ 
+    renderTodos(filteredTodos, handleRemove, handleEdit, handleToggle);
+    updateFilterButtons(filterStatus);
+};
+
+
 const handleSubmit = (event: Event): void => {
-    event.preventDefault(); // Prevent the default form submission behavior
-    const text = todoInput.value.trim(); // Get the value of the input field and remove any leading or trailing whitespace
-    const dueDatec = dateInput.value || null; // Get the due date value or null if not set
+    event.preventDefault();
+    const text = todoInput.value.trim();
+    const dueDatec = dateInput.value || null;
+
     if (text !== "") {
         clearInputError();
-        addTodo(text, dueDatec); 
+        addTodo(text, dueDatec);
+        clearInputs();
         updateUI();
     } else {
         showInputError();
@@ -146,23 +175,24 @@ const handleSubmit = (event: Event): void => {
 };
 
 
-const hendleFilter = (status: FilterStatus): void => {
-  setFilterStatus(status);
-  updateUI();
-}
+const handleFilter = (status: FilterStatus): void => {
+    setFilterStatus(status);
+    updateUI();
+};
 
 
 todoForm.addEventListener("submit", handleSubmit);
 
-filterAll.addEventListener("click", () => hendleFilter("all"));
-filterActive.addEventListener("click", () => hendleFilter("active"));
-filterCompleted.addEventListener("click", () => hendleFilter("completed"));
+filterAll.addEventListener("click", () => handleFilter("all"));
+filterActive.addEventListener("click", () => handleFilter("active"));
+filterCompleted.addEventListener("click", () => handleFilter("completed"));
 
-// Call the initializeColorPicker function when the DOM is fully loaded
+
 document.addEventListener("DOMContentLoaded", () => {
     initializeColorPicker();
     updateUI();
 });
+
 
 /**
  * Kristian: 6th of September 2024, BDE
