@@ -56,3 +56,4 @@ export const toggleTodoCompleted = (id: number): void => {
 };
 
 
+// Additional state management functions can be added heregi
