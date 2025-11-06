@@ -2,7 +2,10 @@ name: TodoWorkflow
 on:
   push:
     branches:
-      - "main"  
+      ["main"]  
+  pull_request:
+    branches:
+      ["main"]
 
 jobs:
   integration-delivery:
